@@ -63,6 +63,7 @@ const getPaciente = async (req, res) => {
  */
 const createPaciente = async (req, res) => {
   const { body } = req;
+  console.log(body);
   const data = await pacienteModel.create(body);
   res.send({ data });
 };
