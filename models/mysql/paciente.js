@@ -21,6 +21,15 @@ const Paciente = sequelize.define(
     retinopathy: {
       type: DataTypes.BOOLEAN,
     },
+    nonProRetinopathy: {
+      type: DataTypes.NUMBER,
+    },
+    proRetinopathy: {
+      type: DataTypes.NUMBER,
+    },
+    codes: {
+      type: DataTypes.NUMBER,
+    },
     diabetic: {
       type: DataTypes.BOOLEAN,
     },
