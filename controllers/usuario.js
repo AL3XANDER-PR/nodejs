@@ -10,7 +10,7 @@ const { Op } = require("sequelize");
 const createUsuario = async (req, res) => {
   const { body, file } = req;
   console.log(file);
-  const url_format = `nodejs-production-6c72.up.railway.app/${file.filename}`;
+  const url_format = `https://nodejs-production-6c72.up.railway.app/${file.filename}`;
   const data = await usuarioModel.create({ ...body, url_format });
   res.send({ data });
 };
