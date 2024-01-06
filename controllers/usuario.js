@@ -11,7 +11,7 @@ const { handleHttpError } = require("../utils/handleErrors");
 const createUsuario = async (req, res) => {
   const { body, file } = req;
   console.log(file);
-  const url_format = `https://nodejs-production-6c72.up.railway.app/${file.filename}`;
+  const url_format = `https://nodejs-production-b648.up.railway.app/${file.filename}`;
   // const url_format = `http://localhost:3007/${file.filename}`;
   const data = await usuarioModel.create({ ...body, url_format });
   res.send({ data });
