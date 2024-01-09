@@ -1,5 +1,9 @@
 const express = require("express");
-const { createUsuario, getUsuario } = require("../controllers/usuario");
+const {
+  createUsuario,
+  getUsuario,
+  getUsuarioByPhone,
+} = require("../controllers/usuario");
 const multer = require("multer");
 const { validatorCreateUsuario } = require("../validator/usuario");
 const router = express.Router();
@@ -26,5 +30,6 @@ router.post(
 );
 
 router.get("/", getUsuario);
+router.get("/byphone", getUsuarioByPhone);
 
 module.exports = router;

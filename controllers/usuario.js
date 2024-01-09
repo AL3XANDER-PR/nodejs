@@ -41,8 +41,24 @@ const getUsuario = async (req, res) => {
     handleHttpError(res, "ERROR_EN_GET_USUARIOS");
   }
 };
+const getUsuarioByPhone = async (req, res) => {
+  const { body, query } = req;
+  try {
+    console.log(query);
+    const data = await usuarioModel.findOne({
+      where: {
+        phone: { [Op.like]: req.query.phone },
+      },
+    });
+    res.send({ data });
+  } catch (error) {
+    console.log(error);
+    handleHttpError(res, "ERROR_EN_GET_USUARIOS");
+  }
+};
 
 module.exports = {
   createUsuario,
   getUsuario,
+  getUsuarioByPhone,
 };
