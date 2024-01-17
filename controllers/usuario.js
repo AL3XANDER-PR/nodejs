@@ -41,6 +41,49 @@ const getUsuario = async (req, res) => {
     handleHttpError(res, "ERROR_EN_GET_USUARIOS");
   }
 };
+const getUsuarios = async (req, res) => {
+  console.log(req.query);
+  const params = {
+    q: req.query.q,
+    perPage: Number(req.query.perPage),
+    page: Number(req.query.page)
+      ? Number(req.query.page) * Number(req.query.perPage)
+      : 0,
+  };
+  const data = await usuarioModel.findAndCountAll({
+    where: {
+      [Op.or]: [
+        sequelize.where(
+          sequelize.fn(
+            "concat",
+            sequelize.col("firstName"),
+            " ",
+            sequelize.col("lastName")
+          ),
+          { [Op.like]: "%" + params.q + "%" }
+        ),
+      ],
+    },
+    offset: params.page,
+    limit: params.perPage,
+  });
+
+  const totalPages = Math.ceil(data.count / params.perPage);
+  // console.log(totalPages);
+  console.log();
+
+  res.send({
+    count: data.count,
+    rows: data.rows,
+    totalPages: totalPages,
+    currentPageNumber: Number(req.query.page) + 1,
+    to:
+      (Number(req.query.page) + 1) * Number(req.query.perPage) <= data.count
+        ? (Number(req.query.page) + 1) * Number(req.query.perPage)
+        : data.count,
+    from: data.count,
+  });
+};
 const getUsuarioByPhone = async (req, res) => {
   const { body, query } = req;
   try {
@@ -61,4 +104,5 @@ module.exports = {
   createUsuario,
   getUsuario,
   getUsuarioByPhone,
+  getUsuarios,
 };

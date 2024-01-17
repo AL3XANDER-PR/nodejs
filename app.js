@@ -6,8 +6,8 @@ const { dbConnectMysql } = require("./config/mysql");
 const app = express();
 
 const ENGINE_DB = process.env.ENGINE_DB;
-app.use(express.static("storage"));
 app.use(cors());
+app.use(express.static("storage"));
 app.use(express.json());
 
 const port = process.env.PORT || 3000;

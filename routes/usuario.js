@@ -2,6 +2,8 @@ const express = require("express");
 const {
   createUsuario,
   getUsuario,
+  getUsuarios,
+  getReportBot,
   getUsuarioByPhone,
 } = require("../controllers/usuario");
 const multer = require("multer");
@@ -30,6 +32,7 @@ router.post(
 );
 
 router.get("/", getUsuario);
+router.get("/getUsuarios", getUsuarios);
 router.get("/byphone", getUsuarioByPhone);
 
 module.exports = router;
